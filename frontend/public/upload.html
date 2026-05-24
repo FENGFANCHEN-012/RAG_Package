@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Text Upload</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📥 Vector Store 数据上传</h1>
+            <p class="subtitle">粘贴文本并上传到向量库</p>
+        </header>
+
+        <main>
+            <div class="settings-panel" style="display:block;">
+                <div style="margin-bottom: 12px;">
+                    <label for="source-name">数据来源标记:</label>
+                    <input id="source-name" type="text" value="manual_upload" style="margin-left: 8px; padding: 8px; width: 220px;" />
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label for="chunk-size">Chunk Size:</label>
+                    <input id="chunk-size" type="number" value="500" min="100" max="4000" style="margin: 0 16px 0 8px; padding: 8px; width: 120px;" />
+
+                    <label for="chunk-overlap">Chunk Overlap:</label>
+                    <input id="chunk-overlap" type="number" value="50" min="0" max="1000" style="margin-left: 8px; padding: 8px; width: 120px;" />
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label for="split-method">分块方式:</label>
+                    <select id="split-method" style="margin-left: 8px; padding: 8px; width: 220px;">
+                        <option value="character">普通切割（按字符数）</option>
+                        <option value="markdown_headers">按 Header 切割（保留 # ## 标题）</option>
+                    </select>
+                    <small style="display: block; margin-top: 4px; color: #666;">
+                        按 Header 切割：# 和 ## 标题处不会切断，但太大的段落仍会被切分
+                    </small>
+                </div>
+
+                <div>
+                    <label for="upload-text">文本内容:</label>
+                    <textarea
+                        id="upload-text"
+                        rows="12"
+                        placeholder="在这里粘贴要上传到 Vector Store 的文本内容"
+                        style="width:100%; margin-top:8px; padding:12px; border:1px solid var(--border-color); border-radius:8px;"
+                    ></textarea>
+                </div>
+
+                <div style="margin-top: 16px; display:flex; gap:12px; align-items:center;">
+                    <button id="upload-btn" class="quick-btn" style="padding: 10px 16px;">上传到 Vector Store</button>
+                    <a href="/" class="quick-btn" style="text-decoration:none;">返回聊天页</a>
+                    <span id="upload-status" class="status"></span>
+                </div>
+            </div>
+
+            <div class="chat-container" id="result-box" style="min-height: 160px; max-height: 280px;">
+                <div class="welcome-message" style="padding: 24px;">
+                    <h2>上传结果</h2>
+                    <p>点击上传后，这里会显示 Vector Store 写入结果。</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Upload endpoint: POST /api/upload-text</p>
+        </footer>
+    </div>
+
+    <script src="../js/upload.js"></script>
+</body>
+</html>

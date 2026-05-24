@@ -1,0 +1,5 @@
+{
+    "require": {
+        "askedio/laravel-soft-cascade": "^13.0"
+    }
+}
